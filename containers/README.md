@@ -26,8 +26,12 @@ docker build -f <file.dockerfile> -t <name:tag> .
 enroot import dockerd://<name:tag>
 ```
 
-3. Use Pyxis’ flags pointing to the <name:tag>.sqsh
+3. Use Pyxis' flags pointing to the <name:tag>.sqsh
 
 ```bash
 --container-image=<name:tag>.sqsh
 ```
+
+## Training Example
+
+See `torchtitan_multinode.sh` for a complete example of running a multi-node torchtitan training job with containers.
