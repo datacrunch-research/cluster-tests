@@ -9,10 +9,14 @@
 #SBATCH -e /home/ubuntu/slurm_logging/headnode/%x_%j.err
 
 # Setup PyTorch environment
-bash /home/pytorch.setup.sh
+source /home/pytorch.setup.sh
 
 # Install additional packages required by the benchmark
 pip install matplotlib packaging
+
+# Check if python is available
+which python || which python3
+echo "Python version: $(python --version 2>/dev/null || python3 --version)"
 
 # === Compute these HOST-side ===
 HEADNODE_HOST=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n1)
@@ -34,11 +38,11 @@ scontrol show hostnames "$SLURM_JOB_NODELIST"
 echo "===================================="
 
 # Run the PyTorch NCCL benchmark
-srun python -u -m torch.distributed.run \
+srun bash -c "source /home/pytorch.setup.sh && python -u -m torch.distributed.run \
     --nproc_per_node $GPUS_PER_NODE \
     --nnodes $NNODES \
     --rdzv_endpoint $MASTER_ADDR:$MASTER_PORT \
     --rdzv_backend c10d \
     --max_restarts 0 \
     --tee 3 \
-    all_reduce_bench.py
+    all_reduce_bench.py"
