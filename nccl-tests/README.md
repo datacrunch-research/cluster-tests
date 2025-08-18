@@ -26,9 +26,9 @@ modules load hpcx
 Then we need to compile nccl-tests with the HPC-X binaries:
 
 ```bash
-git clone https://github.com/NVIDIA/nccl-tests.git; \
-cd /home/ubuntu/nccl-tests; \
-make MPI=1 -j$(nproc);
+git clone https://github.com/NVIDIA/nccl-tests.git
+cd nccl-tests
+make MPI=1 -j$(nproc)
 ```
 
 We add hostfile.txt as the list of workernodes to perform the test:
