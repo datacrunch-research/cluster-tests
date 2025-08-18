@@ -57,9 +57,8 @@ The cluster uses uv for Python package management. First, set up the PyTorch env
 # Setup PyTorch environment (installs PyTorch 2.8 with CUDA 12.9)
 bash /home/pytorch.setup.sh
 
-# Activate the environment and install additional packages required by the benchmark
-. /home/venv_ubuntu_cu129/bin/activate
-pip install matplotlib packaging
+# Install additional packages required by the benchmark using uv
+uv pip install matplotlib packaging
 ```
 
 #### Running the benchmark
