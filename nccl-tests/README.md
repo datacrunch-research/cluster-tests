@@ -20,7 +20,7 @@ sbatch all_reduce_example_slurm.job
 First, we load the HPC-X module:
 
 ```bash
-modules load hpcx
+module load hpcx
 ```
 
 Then we need to compile nccl-tests with the HPC-X binaries:
