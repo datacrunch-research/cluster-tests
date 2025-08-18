@@ -47,24 +47,6 @@ See `hpcx_nccl_test.sh` for a complete example script that automates this proces
 
 ### NCCL from Pytorch
 
-#### Singlenode
-
-Assuming https://github.com/datacrunch-research/supercomputing-clusters has been cloned on `/home/ubuntu/`
-
-```bash
-# on supercomputing-clusters/nccl_test
-torchrun --standalone --nproc_per_node=8 nccl_torch.py --min-size 512MB --max-size 8GB --num-iters 5 --pin-memory --preallocate
-```
-
-#### Multinode
-
-```bash
-# on supercomputing-clusters/multinode_torch_distributed
-sbatch slurm_multinode_torch_distributed.sh
-```
-
-#### PyTorch NCCL Benchmark (Alternative)
-
 We also provide an alternative PyTorch-based NCCL benchmark adapted from [ml-engineering](https://github.com/stas00/ml-engineering) that's easier to set up and only requires PyTorch:
 
 ```bash
