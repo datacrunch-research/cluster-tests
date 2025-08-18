@@ -6,9 +6,9 @@ This repository provides health check tests for users of [DataCrunch Instant Clu
 
 DataCrunch Instant Clusters provide on-demand access to high-performance computing resources. To ensure your cluster is operating correctly, we've developed these validation tests that cover different layers of a typical ML workload:
 
-- **Container-based tests**: Validate containerized workloads using SLURM with Enroot/Pyxis
-- **NCCL communication tests**: Verify high-speed networking and GPU-to-GPU communication
-- **Training workload tests**: End-to-end validation of distributed training scenarios
+- **Container-based tests**: Validate containerized workloads using SLURM with Enroot/Pyxis.
+- **NCCL communication tests**: Verify high-speed networking and GPU-to-GPU communication.
+- **Training workload tests**: End-to-end validation of distributed training scenarios.
 
 Some of these tests are run during our internal validation process to ensure clusters meet performance benchmarks before delivery.
 
@@ -20,7 +20,7 @@ Some of these tests are run during our internal validation process to ensure clu
    cd cluster-tests
    ```
 
-2. **Navigate to the test category** you want to run (see individual README files for detailed instructions)
+2. **Navigate to the test category** you want to run (see individual README files for detailed instructions).
 
-3. **Follow the setup and execution** instructions in each directory
+3. **Follow the setup and execution** instructions in each directory.
 
