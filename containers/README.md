@@ -9,7 +9,7 @@ enroot import docker://ubuntu:22.04
 Then specify the container using the `--container-image=ubuntu:22.04` flag:
 
 ```bash
-sudo srun --container-image=ubuntu:22.04 grep PRETTY /etc/os-release
+srun --container-image=ubuntu:22.04 grep PRETTY /etc/os-release
 ```
 
 Alternatively to use a custom image built in dockerd:
