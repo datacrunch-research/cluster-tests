@@ -26,7 +26,7 @@ docker build -f <file.dockerfile> -t <name:tag> .
 enroot import dockerd://<name:tag>
 ```
 
-3. Use Pyxis' flags pointing to the <name:tag>.sqsh
+3. Use flag pointing to the <name:tag>.sqsh
 
 ```bash
 --container-image=<name:tag>.sqsh
