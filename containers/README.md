@@ -34,4 +34,6 @@ enroot import dockerd://<name:tag>
 
 ## Training Example
 
-See `torchtitan_multinode.sh` for a complete example of running a multi-node torchtitan training job with containers.
+The training example uses the provided `torchtitan.dockerfile` to build a container with PyTorch 2.7 and CUDA 12.8 support.
+
+See `torchtitan_multinode.sh` for a complete example of running a multi-node torchtitan training job with containers built from the provided Dockerfile.
