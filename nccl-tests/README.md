@@ -1,6 +1,3 @@
-# NCCL Tests
-
-This page outlines the tests that you can run on your instant cluster to ensure that it is operating correctly. They are structured to tackle different layers of a typical ML workload. The scripts used in this section can be found on our repo: https://github.com/datacrunch-research/supercomputing-clusters
 
 ## NCCL test
 
