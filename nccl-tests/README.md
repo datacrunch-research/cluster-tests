@@ -62,3 +62,13 @@ torchrun --standalone --nproc_per_node=8 nccl_torch.py --min-size 512MB --max-si
 # on supercomputing-clusters/multinode_torch_distributed
 sbatch slurm_multinode_torch_distributed.sh
 ```
+
+#### PyTorch NCCL Benchmark (Alternative)
+
+We also provide an alternative PyTorch-based NCCL benchmark adapted from [ml-engineering](https://github.com/stas00/ml-engineering) that's easier to set up and only requires PyTorch:
+
+```bash
+sbatch pytorch_nccl_bench.sh
+```
+
+This benchmark (`all_reduce_bench.py`) provides detailed bandwidth measurements and automatically generates plots if matplotlib is available. It measures payload ranges from 32KB to 16GB and provides both algorithm bandwidth (algbw) and bus bandwidth (busbw) results.
