@@ -30,8 +30,8 @@ echo "All Hosts:"
 scontrol show hostnames "$SLURM_JOB_NODELIST"
 echo "===================================="
 
-# Create a wrapper script for srun
-cat > /tmp/run_benchmark_${SLURM_JOB_ID}.sh << 'EOF'
+# Create a wrapper script in shared location for srun
+cat > /home/ubuntu/cluster-tests/nccl-tests/run_benchmark_${SLURM_JOB_ID}.sh << 'EOF'
 #!/bin/bash
 . /home/venv_ubuntu_cu129/bin/activate
 cd /home/ubuntu/cluster-tests/nccl-tests
@@ -45,11 +45,11 @@ python -u -m torch.distributed.run \
     all_reduce_bench.py
 EOF
 
-chmod +x /tmp/run_benchmark_${SLURM_JOB_ID}.sh
+chmod +x /home/ubuntu/cluster-tests/nccl-tests/run_benchmark_${SLURM_JOB_ID}.sh
 
 # Run the PyTorch NCCL benchmark
 srun --export=ALL,GPUS_PER_NODE=$GPUS_PER_NODE,NNODES=$NNODES,MASTER_ADDR=$MASTER_ADDR,MASTER_PORT=$MASTER_PORT \
-     /tmp/run_benchmark_${SLURM_JOB_ID}.sh
+     /home/ubuntu/cluster-tests/nccl-tests/run_benchmark_${SLURM_JOB_ID}.sh
 
 # Cleanup
-rm -f /tmp/run_benchmark_${SLURM_JOB_ID}.sh
+rm -f /home/ubuntu/cluster-tests/nccl-tests/run_benchmark_${SLURM_JOB_ID}.sh
