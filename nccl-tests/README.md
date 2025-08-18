@@ -47,7 +47,22 @@ See `hpcx_nccl_test.sh` for a complete example script that automates this proces
 
 ### NCCL from Pytorch
 
-We also provide an alternative PyTorch-based NCCL benchmark adapted from [ml-engineering](https://github.com/stas00/ml-engineering) that's easier to set up and only requires PyTorch:
+We also provide an alternative PyTorch-based NCCL benchmark adapted from [ml-engineering](https://github.com/stas00/ml-engineering) that's easier to set up and only requires PyTorch.
+
+#### Setup (run once)
+
+The cluster uses uv for Python package management. First, set up the PyTorch environment:
+
+```bash
+# Setup PyTorch environment (installs PyTorch 2.8 with CUDA 12.9)
+bash /home/pytorch.setup.sh
+
+# Activate the environment and install additional packages required by the benchmark
+. /home/venv_ubuntu_cu129/bin/activate
+pip install matplotlib packaging
+```
+
+#### Running the benchmark
 
 ```bash
 sbatch pytorch_nccl_bench.sh

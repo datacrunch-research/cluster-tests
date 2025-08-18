@@ -8,15 +8,8 @@
 #SBATCH -o /home/ubuntu/slurm_logging/headnode/%x_%j.out
 #SBATCH -e /home/ubuntu/slurm_logging/headnode/%x_%j.err
 
-# Setup PyTorch environment
-source /home/pytorch.setup.sh
-
-# Install additional packages required by the benchmark
-pip install matplotlib packaging
-
-# Check if python is available
-which python || which python3
-echo "Python version: $(python --version 2>/dev/null || python3 --version)"
+# Change to the script directory
+cd /home/ubuntu/cluster-tests/nccl-tests
 
 # === Compute these HOST-side ===
 HEADNODE_HOST=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n1)
@@ -37,12 +30,26 @@ echo "All Hosts:"
 scontrol show hostnames "$SLURM_JOB_NODELIST"
 echo "===================================="
 
-# Run the PyTorch NCCL benchmark
-srun bash -c "source /home/pytorch.setup.sh && python -u -m torch.distributed.run \
+# Create a wrapper script for srun
+cat > /tmp/run_benchmark_${SLURM_JOB_ID}.sh << 'EOF'
+#!/bin/bash
+. /home/venv_ubuntu_cu129/bin/activate
+cd /home/ubuntu/cluster-tests/nccl-tests
+python -u -m torch.distributed.run \
     --nproc_per_node $GPUS_PER_NODE \
     --nnodes $NNODES \
     --rdzv_endpoint $MASTER_ADDR:$MASTER_PORT \
     --rdzv_backend c10d \
     --max_restarts 0 \
     --tee 3 \
-    all_reduce_bench.py"
+    all_reduce_bench.py
+EOF
+
+chmod +x /tmp/run_benchmark_${SLURM_JOB_ID}.sh
+
+# Run the PyTorch NCCL benchmark
+srun --export=ALL,GPUS_PER_NODE=$GPUS_PER_NODE,NNODES=$NNODES,MASTER_ADDR=$MASTER_ADDR,MASTER_PORT=$MASTER_PORT \
+     /tmp/run_benchmark_${SLURM_JOB_ID}.sh
+
+# Cleanup
+rm -f /tmp/run_benchmark_${SLURM_JOB_ID}.sh
