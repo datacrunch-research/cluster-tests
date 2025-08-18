@@ -7,7 +7,7 @@ Three options are available:
 - nccl-tests using NVIDIA HPC-X suite.
 - nccl-tests included in torch.
 
-### NCCL test from the system
+### NCCL test from the SPACK module
 
 At `/home/ubuntu/`:
 
