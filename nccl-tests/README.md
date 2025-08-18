@@ -43,7 +43,7 @@ Once compiled, we can test it with the following command:
 mpirun -np 16 -N 8 -x NCCL_NET_PLUGIN=/opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so -hostfile hostfile.txt ./build/all_reduce_perf -b 512M -e 8G -f 2 -g 1
 ```
 
-This script can be found on our repository here.
+See `hpcx_nccl_test.sh` for a complete example script that automates this process.
 
 ### NCCL from Pytorch
 
