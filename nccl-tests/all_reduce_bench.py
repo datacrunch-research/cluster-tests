@@ -173,12 +173,10 @@ def run(local_rank):
     start_event = torch.cuda.Event(enable_timing=True)
     end_event = torch.cuda.Event(enable_timing=True)
 
-    lower_limit = 15
-    upper_limit = 34
-
-    #lower_limit = 32
-    #upper_limit = 20
-    # 2**15 to 2**34 => 32KB to 16GB
+    # Match NCCL tests: -b 512M -e 8G -f 2
+    # 512MB = 2**29, 8GB = 2**33, factor 2 means powers of 2
+    lower_limit = 29  # 512MB
+    upper_limit = 33  # 8GB
     sizes = [2**x for x in range(lower_limit, upper_limit+1)]
 
     # this is useful for when one wants to interrupt the run - and still report the best outcome so far

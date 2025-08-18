@@ -67,4 +67,4 @@ uv pip install matplotlib packaging
 sbatch pytorch_nccl_bench.sh
 ```
 
-This benchmark (`all_reduce_bench.py`) provides detailed bandwidth measurements and automatically generates plots if matplotlib is available. It measures payload ranges from 32KB to 16GB and provides both algorithm bandwidth (algbw) and bus bandwidth (busbw) results.
+This benchmark (`all_reduce_bench.py`) provides detailed bandwidth measurements and automatically generates plots if matplotlib is available. It measures payload ranges from 512MB to 8GB (matching the NCCL tests: -b 512M -e 8G -f 2) and provides both algorithm bandwidth (algbw) and bus bandwidth (busbw) results.
