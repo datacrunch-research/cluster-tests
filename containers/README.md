@@ -1,3 +1,5 @@
-# Containers Health Check
+# Containers
 
-Container-based health checks for cluster validation.
+To run a SLURM script with a container specify the container using the --container-image=ubuntu flag e.g.:
+
+sudo srun --container-image=ubuntu grep PRETTY /etc/os-release
